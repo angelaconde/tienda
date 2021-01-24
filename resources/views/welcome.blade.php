@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Supermercado La Marisma</title>
+    <title>Supermercado La Marisma</title> --}}
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"> --}}
     <!-- Styles -->
-    <style>
+    {{-- <style>
         html {
             line-height: 1.15;
             -webkit-text-size-adjust: 100%
@@ -386,13 +386,13 @@
             }
         }
 
-    </style>
-    <style>
+    </style> --}}
+    {{-- <style>
         body {
             font-family: 'Nunito';
         }
 
-    </style>
+    </style> --}}
 </head>
 
 <body class="antialiased">
@@ -414,10 +414,9 @@
 
         @extends('layouts.app')
 
-        @include('navbar')
-
+        @section('content')
         <!-- PRODUCTOS -->
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 @foreach ($product as $product)
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 p-2 card-container">
@@ -442,6 +441,7 @@
             </div>
         </div>
         <!-- FIN DE PRODUCTOS -->
+        @endsection
 
         {{--
     </div> --}}

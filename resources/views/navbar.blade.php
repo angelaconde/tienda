@@ -4,7 +4,8 @@ $category = CategoryController::index();
 ?>
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+    <div class="container">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -12,14 +13,18 @@ $category = CategoryController::index();
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link h4" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link h5" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             @foreach ($category as $category)
                 <li class="nav-item">
-                    <a class="nav-link h4" href="#">{{ $category->nombre }}</a>
+                    <a class="nav-link h5" href="#">{{ $category->nombre }}</a>
                 </li>
             @endforeach
         </ul>
+        <ul class="navbar-nav ml-auto">
+            <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i>Carrito</a>
+        </ul>
     </div>
+</div>
 </nav>
 <!-- FIN DE NAVBAR -->
