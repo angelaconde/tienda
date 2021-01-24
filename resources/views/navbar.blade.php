@@ -12,17 +12,22 @@ $category = CategoryController::index();
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+            <div class="container">
             <li class="nav-item active">
-                <a class="nav-link h5" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link h5" href="#">Destacados <span class="sr-only">(current)</span></a>
             </li>
             @foreach ($category as $category)
                 <li class="nav-item">
                     <a class="nav-link h5" href="#">{{ $category->nombre }}</a>
                 </li>
             @endforeach
+            </div>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i>Carrito</a>
+            <div class="container">
+            <span class="badge badge-pill badge-light">0</span>
+            <a class="nav-link h3" href="#"><i class="fas fa-shopping-cart"></i></a>
+            </div>
         </ul>
     </div>
 </div>
