@@ -393,7 +393,7 @@
         }
 
     </style> --}}
-</head>
+{{-- </head> --}}
 
 <body class="antialiased">
     {{-- <div
@@ -432,8 +432,9 @@
                                 </div>
                             </a>
                             <p class="btn w-100 px-4 mx-auto">
-                                <input type="submit" class="btn btn-dark btn-lg w-100" name="anadir"
-                                    value="Añadir al carrito">
+                                <button type="button" class="btn btn-dark btn-md">
+                                    <i class="fas fa-shopping-cart mb-2 pr-2"></i>Añadir al carrito
+                                </button>
                             </p>
                         </div>
                     </div>
@@ -447,4 +448,4 @@
     </div> --}}
 </body>
 
-</html>
+{{-- </html> --}}
