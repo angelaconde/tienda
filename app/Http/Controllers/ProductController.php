@@ -14,8 +14,22 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::all();
-        return view('welcome')->with('product', $product);
+        $pagination = 8;
+        $products = Product::paginate($pagination);
+        return view('welcome')->with('products', $products);
+    }
+
+    /**
+     * Display a listing of the resource by category id.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexByCategory($categoria_id)
+    {
+        $pagination = 8;
+        $products = Product::where('categorias_id', $categoria_id)->paginate($pagination);
+        abort_if($products->isEmpty(), 404);
+        return view('welcome')->with('products', $products);
     }
 
     /**
@@ -47,7 +61,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return view('show', [ 'product' => Product::findOrFail($id)]);
+        return view('show', ['product' => Product::findOrFail($id)]);
     }
 
     /**

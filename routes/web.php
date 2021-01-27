@@ -17,12 +17,11 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/','ProductController@index');
+Route::get('/', 'ProductController@index');
+Route::get('categoria/{categoria_id}', 'ProductController@indexByCategory')->name('categoria');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('product', ProductController::class);
-Route::resource('category', CategoryController::class);
-
