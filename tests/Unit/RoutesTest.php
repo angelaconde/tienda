@@ -13,13 +13,50 @@ class RoutesTest extends TestCase
      *
      * @return void
      */
-    public function testRoutes()
+    public function testRoute()
     {
-        $routes = ['/', '/producto', '/categoria', '/ruta_falsa_que_da_error'];
-        foreach ($routes as $route) {
-            $response = $this->get($route);
-            $response->assertStatus(200);
-        }
+        $response = $this->get('/');
+        $response->assertStatus(200);
+    }
+    /**
+     * Test to check routes work.
+     *
+     * @return void
+     */
+    public function testRouteProduct()
+    {
+        $response = $this->get('/product');
+        $response->assertStatus(200);
+    }
+    /**
+     * Test to check routes work.
+     *
+     * @return void
+     */
+    public function testRouteCategoryFrescos()
+    {
+        $response = $this->get('/categoria/1');
+        $response->assertStatus(200);
+    }
+    /**
+     * Test to check routes work.
+     *
+     * @return void
+     */
+    public function testRouteLogin()
+    {
+        $response = $this->get('/login');
+        $response->assertStatus(200);
+    }
+    /**
+     * Test to check routes work.
+     *
+     * @return void
+     */
+    public function testRouteRegister()
+    {
+        $response = $this->get('/register');
+        $response->assertStatus(200);
     }
     /**
      * Test to check empty category gives 404 error message.
