@@ -1,6 +1,6 @@
 <?php
 use App\Models\Category;
-$category = Category::all();
+$category = Category::where('oculto', 0)->get();
 ?>
 
 <!-- NAVBAR -->

@@ -18,7 +18,7 @@
                                     <p>{{ $product->precio }}€</p>
                                 </div>
                             </a>
-                            <p class="btn w-100 px-4 mx-auto">
+                            <p class="btn w-100 px-4 mx-auto mt-auto">
                                 <button type="button" class="btn btn-dark btn-md">
                                     <i class="fas fa-shopping-cart mb-2 pr-2"></i>Añadir al carrito
                                 </button>
