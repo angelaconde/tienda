@@ -13,15 +13,21 @@ $category = Category::all();
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <div class="container">
-                    <li class="nav-item active">
-                        <a class="nav-link h5" href="#">Destacados <span class="sr-only">(current)</span></a>
+                    <li class="nav-item {{ isset($categoria) && $categoria == 'destacado' ? 'active' : '' }}">
+                        <a class="nav-link h5" href="{{ url('/') }}">Destacados
+                        </a>
                     </li>
                     @foreach ($category as $category)
-                        <li class="nav-item">
+                        <li
+                            class="nav-item {{ isset($categoria) && $categoria == $category->id ? 'active' : '' }}">
                             <a class="nav-link h5"
                                 href="{{ route('categoria', $category->id) }}">{{ $category->nombre }}</a>
                         </li>
                     @endforeach
+                    <li class="nav-item {{ isset($categoria) && $categoria == 'todo' ? 'active' : '' }}">
+                        <a class="nav-link h5" href="{{ route('todo') }}">Todo
+                        </a>
+                    </li>
                 </div>
             </ul>
             <ul class="navbar-nav ml-auto">

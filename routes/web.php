@@ -13,12 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::get('/', 'ProductController@index');
+Route::get('/', 'ProductController@indexByFeatured');
 Route::get('categoria/{categoria_id}', 'ProductController@indexByCategory')->name('categoria');
+Route::get('todo', 'ProductController@index')->name('todo');
+
 
 Auth::routes();
 

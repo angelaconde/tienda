@@ -36,11 +36,4 @@
         </div>
         <!-- FIN DE PRODUCTOS -->
     @endsection
-
-    {{--
-    </div> --}}
 </body>
-
-{{--
-
-</html> --}}
