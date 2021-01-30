@@ -22,23 +22,37 @@
                     </div>
                     <h5 class="pt-1">{{ $product->descripcion }}</h5>
                     <hr>
-
-                    <form class="form">
+                    <!-- AÑADIR AL CARRITO -->
+                    <form action="{{ route('cart.add') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $product->id }}">
                         <div class="form-row align-items-center">
+                            <div class="col-2">
                                 <label for="cantidad" class="col-form-label">Cantidad:</label>
-                                <div class="col-2">
+                            </div>
+                            <div class="col-2">
                                 <input min="1" id="cantidad" name="cantidad" value="1" type="number" class="form-control">
                             </div>
                             <div class="col">
-                            <button type="button" class="btn btn-dark btn-md">
-                                <i class="fas fa-shopping-cart mb-2 pr-2"></i>Añadir al carrito
-                            </button>
+                                <button type="submit" name="btn" class="btn btn-dark btn-md"> <i
+                                        class="fas fa-shopping-cart mb-2 pr-2"></i>Añadir al carrito
+                                </button>
                             </div>
                         </div>
                     </form>
+                    <!-- FIN DE CARRITO -->
                 </div>
             </div>
-        </div>
+            <!-- ALERTA DE PRODUCTO AÑADIDO -->
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+            <!-- FIN DE ALERTA -->
         </div>
         <!-- FIN DE DETALLE DE PRODUCTO -->
     @endsection

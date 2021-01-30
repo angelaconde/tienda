@@ -13,13 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Productos
 Route::get('/', 'ProductController@indexByFeatured');
 Route::get('categoria/{categoria_id}', 'ProductController@indexByCategory')->name('categoria');
 Route::get('todo', 'ProductController@index')->name('todo');
-
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::resource('product', ProductController::class);
+
+// Carrito
+Route::post('/cart-add',    'CartController@add')->name('cart.add');
+Route::get('/cart-checkout','CartController@cart')->name('cart.checkout');
+Route::post('/cart-clear',  'CartController@clear')->name('cart.clear');
+Route::post('/cart-removeitem',  'CartController@removeitem')->name('cart.removeitem');
+
+// Auth
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

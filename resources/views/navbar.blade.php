@@ -18,8 +18,7 @@ $category = Category::where('oculto', 0)->get();
                         </a>
                     </li>
                     @foreach ($category as $category)
-                        <li
-                            class="nav-item {{ isset($categoria) && $categoria == $category->id ? 'active' : '' }}">
+                        <li class="nav-item {{ isset($categoria) && $categoria == $category->id ? 'active' : '' }}">
                             <a class="nav-link h5"
                                 href="{{ route('categoria', $category->id) }}">{{ $category->nombre }}</a>
                         </li>
@@ -32,8 +31,8 @@ $category = Category::where('oculto', 0)->get();
             </ul>
             <ul class="navbar-nav ml-auto">
                 <div class="container">
-                    <span class="badge badge-pill badge-light">0</span>
-                    <a class="nav-link h3" href="#"><i class="fas fa-shopping-cart"></i></a>
+                    <span class="badge badge-pill badge-light">{{ Cart::getTotalQuantity() }}</span>
+                    <a class="nav-link h3" href="{{ route('cart.checkout') }}"><i class="fas fa-shopping-cart"></i></a>
                 </div>
             </ul>
         </div>
