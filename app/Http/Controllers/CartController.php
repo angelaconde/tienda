@@ -17,10 +17,13 @@ class CartController extends Controller
             array(
                 'id' => $producto->id,
                 'name' => $producto->nombre,
-                'price' => $producto->precio,
+                'price' => $producto->precio_total,
                 'quantity' => $request->cantidad,
                 'attributes' => array(
-                    'image' => $producto->imagen
+                    'image' => $producto->imagen,
+                    'vatPercent' => $producto->iva,
+                    'vat' => $producto->importe_iva,
+                    'priceWithoutVAT'=> $producto->precio,
                 )
             )
         );

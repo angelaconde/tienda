@@ -15,7 +15,7 @@
                                     <h5 class="card-title font-weight-semi-bold mb-3 w-xl-220p mx-auto">
                                         {{ $product->nombre }}
                                     </h5>
-                                    <h3>{{ $product->precio }}€</h3>
+                                    <h3>{{ $product->precio_total }}€</h3>
                                 </div>
                             </a>
                             <!-- AÑADIR AL CARRITO -->

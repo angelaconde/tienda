@@ -9,7 +9,9 @@
                         <thead class="text-center">
                             <th>IMAGEN</th>
                             <th>NOMBRE</th>
-                            <th>PRECIO</th>
+                            <th>PRECIO SIN IVA</th>
+                            <th>IVA</th>
+                            <th>PRECIO CON IVA</th>
                             <th>CANTIDAD</th>
                             <th>ELIMINAR</th>
                         </thead>
@@ -19,6 +21,8 @@
                                     <td class="align-middle"><img src="{{ asset('img/product/' . $item->attributes->image) }}"
                                             class="img-thumbnail" style="max-width:50px; max-height:50px"></td>
                                     <td class="align-middle">{{ $item->name }}</td>
+                                    <td class="align-middle">{{ $item->attributes->priceWithoutVAT }}€</td>
+                                    <td class="align-middle">{{ $item->attributes->vat }} ({{ $item->attributes->vatPercent }}%)</td>
                                     <td class="align-middle">{{ $item->price }}€</td>
                                     <td class="align-middle">{{ $item->quantity }}</td>
                                     <td class="align-middle">

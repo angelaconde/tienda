@@ -14,7 +14,7 @@
                     <h4>{{ $product->nombre }}</h4>
                     <div class="row align-items-center">
                         <div class="col-3">
-                            <h1><strong>{{ $product->precio }}€</strong></h1>
+                            <h1><strong>{{ $product->precio_total }}€</strong></h1>
                         </div>
                         <div class="col">
                             <p>IVA INCLUIDO</p>
