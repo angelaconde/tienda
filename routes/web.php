@@ -20,10 +20,16 @@ Route::get('todo', 'ProductController@index')->name('todo');
 Route::resource('product', ProductController::class);
 
 // Carrito
-Route::post('/cart-add',    'CartController@add')->name('cart.add');
+Route::post('/cart-add', 'CartController@add')->name('cart.add');
 Route::get('/cart-checkout','CartController@cart')->name('cart.checkout');
-Route::post('/cart-clear',  'CartController@clear')->name('cart.clear');
-Route::post('/cart-removeitem',  'CartController@removeitem')->name('cart.removeitem');
+Route::post('/cart-clear', 'CartController@clear')->name('cart.clear');
+Route::post('/cart-removeitem', 'CartController@removeitem')->name('cart.removeitem');
+
+// Procesar pedido
+Route::get('order', 'OrderController@fillAddress')->name('order');
+Route::get('payment', 'OrderController@payment')->name('payment');
+Route::post('address', 'OrderController@validateAddress')->name('address');
+
 
 // Auth
 Auth::routes();

@@ -47,7 +47,7 @@
                             <p>Subtotal: {{ Cart::getTotal() }}€</p>
                             <p>Envío: 5€</p>
                             <p>Total: {{ Cart::getTotal() + 5 }}€</p>
-                            <form action="" method="POST">
+                            <form action="{{ route('order') }}" method="GET">
                                 @csrf
                                 <button type="submit" class="btn btn-dark btn-lg">Realizar compra</button>
                             </form>
