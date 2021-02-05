@@ -30,7 +30,6 @@ Route::get('order', 'OrderController@fillAddress')->name('order');
 Route::get('payment', 'OrderController@payment')->name('payment');
 Route::post('address', 'OrderController@validateAddress')->name('address');
 
-
 // Auth
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
