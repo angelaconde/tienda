@@ -16,28 +16,29 @@
                                         {{ $product->nombre }}
                                     </h5>
                                     <h3>{{ $product->precio_total }}€</h3>
+                                    <p>Stock: {{ $product->stock }}</p>
                                 </div>
                             </a>
                             <!-- AÑADIR AL CARRITO -->
                             <div class="h-100">
-                            <form action="{{ route('cart.add') }}" method="post" class="h-100">
-                                @csrf
-                                <input type="hidden" name="id" value="{{ $product->id }}">
-                                <div class="row justify-content-center align-items-end h-50">
-                                    <div class="col">
-                                        <label for="cantidad" class="col-form-label">Cantidad:</label>
+                                <form action="{{ route('cart.add') }}" method="post" class="h-100">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $product->id }}">
+                                    <div class="row justify-content-center align-items-end h-50">
+                                        <div class="col">
+                                            <label for="cantidad" class="col-form-label">Cantidad:</label>
+                                        </div>
+                                        <div class="col">
+                                            <input min="1" max="{{ $product->stock }}" id="cantidad" name="cantidad"
+                                                value="1" type="number" class="form-control">
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <input min="1" id="cantidad" name="cantidad" value="1" type="number"
-                                            class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row justify-content-center align-items-end h-50">
+                                    <div class="row justify-content-center align-items-end h-50">
                                         <button type="submit" name="btn" class="btn btn-dark btn-md"> <i
                                                 class="fas fa-shopping-cart mb-2 pr-2"></i>Añadir al carrito
                                         </button>
-                                </div>
-                            </form>
+                                    </div>
+                                </form>
                             </div>
                             <!-- FIN DE CARRITO -->
                         </div>

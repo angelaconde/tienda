@@ -4,6 +4,16 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 bg-light">
+                <!-- ALERTA DE STOCK -->
+                @if (session('stock_alert'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('stock_alert') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+                <!-- FIN DE ALERTA -->
                 @if (count(Cart::getContent()))
                     <table class="table table-striped">
                         <thead class="text-center">
@@ -16,15 +26,39 @@
                             <th>ELIMINAR</th>
                         </thead>
                         <tbody class="text-center align-items-middle">
-                            @foreach (Cart::getContent() as $item)
+                            @foreach (Cart::getContent()->sortBy('name') as $item)
                                 <tr>
-                                    <td class="align-middle"><img src="{{ asset('img/product/' . $item->attributes->image) }}"
+                                    <td class="align-middle"><img
+                                            src="{{ asset('img/product/' . $item->attributes->image) }}"
                                             class="img-thumbnail" style="max-width:50px; max-height:50px"></td>
                                     <td class="align-middle">{{ $item->name }}</td>
                                     <td class="align-middle">{{ $item->attributes->priceWithoutVAT }}€</td>
-                                    <td class="align-middle">{{ $item->attributes->vat }} ({{ $item->attributes->vatPercent }}%)</td>
+                                    <td class="align-middle">{{ $item->attributes->vat }}
+                                        ({{ $item->attributes->vatPercent }}%)</td>
                                     <td class="align-middle">{{ $item->price }}€</td>
-                                    <td class="align-middle">{{ $item->quantity }}</td>
+                                    <td class="align-middle">
+                                        {{-- Actualizar cantidad
+                                        --}}
+                                        <form action="{{ route('cart.update') }}" method="post">
+                                            @csrf
+                                            <div class="form-row align-items-middle justify-content-center">
+                                                <div class="col">
+                                                    <input type="hidden" name="id" value="{{ $item->id }}">
+                                                    <input min="1" max="{{ $item->attributes->stock }}" id="cantidad"
+                                                        name="cantidad"
+                                                        value="{{ $item->quantity <= $item->attributes->stock ? $item->quantity : $item->attributes->stock }}"
+                                                        type="number" class="form-control">
+                                                </div>
+                                                <div class="col-2">
+                                                    <button type="submit" name="btn" class="btn btn-dark btn-sm"><i
+                                                            class="fas fa-sync-alt"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        {{-- Fin de actualizar cantidad
+                                        --}}
+                                    </td>
                                     <td class="align-middle">
                                         <form action="{{ route('cart.removeitem') }}" method="POST">
                                             @csrf

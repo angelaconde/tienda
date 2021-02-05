@@ -23,7 +23,8 @@ class CartController extends Controller
                     'image' => $producto->imagen,
                     'vatPercent' => $producto->iva,
                     'vat' => $producto->importe_iva,
-                    'priceWithoutVAT'=> $producto->precio,
+                    'priceWithoutVAT' => $producto->precio,
+                    'stock' => $producto->stock,
                 )
             )
         );
@@ -47,5 +48,16 @@ class CartController extends Controller
     {
         Cart::clear();
         return back()->with('success', "Se ha vaciado el carrito.");
+    }
+
+    public function updateQuantity(Request $request)
+    {
+        Cart::update($request->id, array(
+            'quantity' => array(
+                'relative' => false,
+                'value' => $request->cantidad
+            ),
+        ));
+        return back()->with('success', "Se ha modificado la cantidad.");
     }
 }
