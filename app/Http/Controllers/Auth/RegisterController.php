@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Rules\NifNie;
 
 class RegisterController extends Controller
 {
@@ -54,9 +55,9 @@ class RegisterController extends Controller
             'surname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'telefono' => ['required', 'numeric', 'min:9'],
-            'nif' => ['required', 'string', 'max:45'],
+            'nif' => [new NifNie, 'required', 'string', 'max:45'],
             'direccion' => ['required', 'string', 'max:255'],
-            'cp' => ['required', 'string', 'max:5'],
+            'cp' => ['required', 'numeric', 'digits:5'],
             'poblacion' => ['required', 'string', 'max:45'],
             'provincia' => ['required', 'string', 'max:45'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
