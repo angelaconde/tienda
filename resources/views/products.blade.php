@@ -29,7 +29,7 @@
                                             <label for="cantidad" class="col-form-label">Cantidad:</label>
                                         </div>
                                         <div class="col">
-                                            <input min="1" max="{{ $product->stock }}" id="cantidad" name="cantidad"
+                                            <input min="1" max="{{ Cart::has($product->id) ? $product->stock - Cart::getContent()->pull($product->id)->quantity : $product->stock }}" id="cantidad" name="cantidad"
                                                 value="1" type="number" class="form-control">
                                         </div>
                                     </div>

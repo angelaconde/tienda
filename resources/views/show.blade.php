@@ -32,8 +32,9 @@
                                 <label for="cantidad" class="col-form-label">Cantidad:</label>
                             </div>
                             <div class="col-2">
-                                <input min="1" max="{{ $product->stock }}" id="cantidad" name="cantidad" value="1"
-                                    type="number" class="form-control">
+                                <input min="1"
+                                    max="{{ Cart::has($product->id) ? $product->stock - Cart::getContent()->pull($product->id)->quantity : $product->stock }}"
+                                    id="cantidad" name="cantidad" value="1" type="number" class="form-control">
                             </div>
                             <div class="col">
                                 <button type="submit" name="btn" class="btn btn-dark btn-md"
