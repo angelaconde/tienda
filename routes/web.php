@@ -34,3 +34,8 @@ Route::post('address', 'OrderController@validateAddress')->name('address');
 // Auth
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Usuarios
+Route::get('profile/{user}', ['as' => 'users.profile', 'uses' => 'UserController@view']);
+Route::get('users/{user}',  ['as' => 'users.edit', 'uses' => 'UserController@edit']);
+Route::patch('users/{user}/update',  ['as' => 'users.update', 'uses' => 'UserController@update']);
