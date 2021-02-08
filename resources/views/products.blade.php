@@ -16,7 +16,7 @@
                                         {{ $product->nombre }}
                                     </h5>
                                     <h3>{{ $product->precio_total }}€</h3>
-                                    <p>Stock: {{ $product->stock }}</p>
+                                    <p>Stock: {{ $product->stock == 0 ? 'AGOTADO' : $product->stock }}</p>
                                 </div>
                             </a>
                             <!-- AÑADIR AL CARRITO -->
@@ -34,8 +34,9 @@
                                         </div>
                                     </div>
                                     <div class="row justify-content-center align-items-end h-50">
-                                        <button type="submit" name="btn" class="btn btn-dark btn-md"> <i
-                                                class="fas fa-shopping-cart mb-2 pr-2"></i>Añadir al carrito
+                                        <button type="submit" name="btn" class="btn btn-dark btn-md"
+                                            {{ $product->stock == 0 ? 'disabled' : '' }}>
+                                            <i class="fas fa-shopping-cart mb-2 pr-2"></i>Añadir al carrito
                                         </button>
                                     </div>
                                 </form>

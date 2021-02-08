@@ -23,7 +23,7 @@
                     <h5 class="pt-1">{{ $product->descripcion }}</h5>
                     <hr>
                     <!-- AÑADIR AL CARRITO -->
-                    <p class="text-muted">Stock: {{ $product->stock }}</p>
+                    <p class="text-muted">Stock: {{ $product->stock == 0 ? 'AGOTADO' : $product->stock }}</p>
                     <form action="{{ route('cart.add') }}" method="post">
                         @csrf
                         <input type="hidden" name="id" value="{{ $product->id }}">
@@ -32,10 +32,12 @@
                                 <label for="cantidad" class="col-form-label">Cantidad:</label>
                             </div>
                             <div class="col-2">
-                                <input min="1" max="{{ $product->stock }}" id="cantidad" name="cantidad" value="1" type="number" class="form-control">
+                                <input min="1" max="{{ $product->stock }}" id="cantidad" name="cantidad" value="1"
+                                    type="number" class="form-control">
                             </div>
                             <div class="col">
-                                <button type="submit" name="btn" class="btn btn-dark btn-md"> <i
+                                <button type="submit" name="btn" class="btn btn-dark btn-md"
+                                    {{ $product->stock == 0 ? 'disabled' : '' }}> <i
                                         class="fas fa-shopping-cart mb-2 pr-2"></i>Añadir al carrito
                                 </button>
                             </div>
