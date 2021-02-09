@@ -9,12 +9,23 @@
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 p-2 card-container">
                         <div class="card text-center product p-4 pt-5 border-0 h-100 rounded-0">
                             <a href="{{ route('product.show', $product) }}">
-                                <img class="img-fluid d-block mx-auto" src="{{ asset('img/product/' . $product->imagen) }}"
-                                    alt="{{ $product->nombre }}">
+                                @if ($product->stock == 0)
+                                    <figure class="figure tag tag-out">
+                                    @elseif ($product->descuento > 0)
+                                        <figure class="figure tag tag-sale">
+                                        @else
+                                            <figure class="figure">
+                                @endif
+                                <img class="img-fluid d-block mx-auto figure-img"
+                                    src="{{ asset('img/product/' . $product->imagen) }}" alt="{{ $product->nombre }}">
+                                </figure>
                                 <div class="card-body p-4 py-0 h-xs-440p">
                                     <h5 class="card-title font-weight-semi-bold mb-3 w-xl-220p mx-auto">
                                         {{ $product->nombre }}
                                     </h5>
+                                    @if ($product->descuento > 0)
+                                        <h4><s>{{ $product->precio_sin_descuento }}€</s></h4>
+                                    @endif
                                     <h3>{{ $product->precio_total }}€</h3>
                                     <p>Stock: {{ $product->stock == 0 ? 'AGOTADO' : $product->stock }}</p>
                                 </div>
@@ -29,8 +40,9 @@
                                             <label for="cantidad" class="col-form-label">Cantidad:</label>
                                         </div>
                                         <div class="col">
-                                            <input min="1" max="{{ Cart::has($product->id) ? $product->stock - Cart::getContent()->pull($product->id)->quantity : $product->stock }}" id="cantidad" name="cantidad"
-                                                value="1" type="number" class="form-control">
+                                            <input min="1"
+                                                max="{{ Cart::has($product->id) ? $product->stock - Cart::getContent()->pull($product->id)->quantity : $product->stock }}"
+                                                id="cantidad" name="cantidad" value="1" type="number" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row justify-content-center align-items-end h-50">

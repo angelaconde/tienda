@@ -1,0 +1,31 @@
+/* ETIQUETA DE OFERTA */
+.figure.tag {
+    position: relative;
+}
+
+.figure.tag::before {
+    position: absolute;
+    top: 10%;
+    display: block;
+    color: white;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+}
+
+.figure.tag-sale::before {
+    content: "Oferta";
+    background: red;
+}
+
+.figure.tag-out::before {
+    content: "Agotado";
+    background: #e2e2e2;
+    border: #ccc;
+    color: #444;
+    top: 42%;
+    right: 0;
+    left: 0;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}

@@ -19,6 +19,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/tags.css') }}" rel="stylesheet">
+
     <style>
         body {
             font-family: 'Nunito';

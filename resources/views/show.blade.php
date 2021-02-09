@@ -7,13 +7,24 @@
         <div class="container p-4">
             <div class="row">
                 <div class="col-12 col-md-6">
+                    @if ($product->stock == 0)
+                        <figure class="figure tag tag-out">
+                        @elseif ($product->descuento > 0)
+                            <figure class="figure tag tag-sale">
+                            @else
+                                <figure class="figure">
+                    @endif
                     <img src="{{ asset('img/product/' . $product->imagen) }}" alt="{{ $product->nombre }}"
                         class="img-fluid">
+                    </figure>
                 </div>
                 <div class="col-12 col-md-6">
                     <h4>{{ $product->nombre }}</h4>
                     <div class="row align-items-center">
                         <div class="col-3">
+                            @if ($product->descuento > 0)
+                                <h4><s>{{ $product->precio_sin_descuento }}€</s></h4>
+                            @endif
                             <h1><strong>{{ $product->precio_total }}€</strong></h1>
                         </div>
                         <div class="col">

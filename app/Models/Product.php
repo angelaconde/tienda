@@ -51,12 +51,23 @@ class Product extends Model
     }
 
     /**
+     * Get price without discounts.
+     * 
+     * @return int
+     */
+    public function getPrecioSinDescuentoAttribute()
+    {
+        return $this->precio + $this->getImporteIvaAttribute();
+    }
+
+    /**
      * Get price without VAT.
      * 
      * @return int
      */
     public function getPrecioTotalAttribute()
     {
-        return $this->precio + $this->getImporteIvaAttribute();
+        $precioConIva = $this->precio + $this->getImporteIvaAttribute();
+        return round($precioConIva - ($precioConIva / 100.0 * $this->descuento), 2);
     }
 }
