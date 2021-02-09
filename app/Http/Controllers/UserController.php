@@ -14,19 +14,20 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function view(User $user){
+    public function view(User $user)
+    {
         $user = Auth::user();
         return view('auth.userprofile', compact('user'));
     }
 
     public function edit(User $user)
-    {   
+    {
         $user = Auth::user();
         return view('auth.edituser', compact('user'));
     }
 
     public function update(User $user)
-    { 
+    {
         $this->validate(request(), [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
@@ -50,5 +51,17 @@ class UserController extends Controller
         $user->save();
 
         return view('auth.userprofile', compact('user'));
+    }
+
+    public function confirmDelete(User $user)
+    {
+        return view('auth.confirmdelete', compact('user'));
+    }
+
+    public function delete(User $user)
+    {
+        $user->deleted_at = NOW();
+        $user->save();
+        return redirect('/');
     }
 }

@@ -80,6 +80,9 @@
                 <div class="col">
                     <a href="{{ route('users.edit', Auth::user()) }}" class="btn btn-primary">Modificar datos</a>
                 </div>
+                <div class="col">
+                    <a href="{{ route('users.confirmdelete', Auth::user()) }}" class="btn btn-primary">Eliminar cuenta</a>
+                </div>
             </div>
         </div>
     </div>

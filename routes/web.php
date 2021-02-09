@@ -39,3 +39,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('profile/{user}', ['as' => 'users.profile', 'uses' => 'UserController@view']);
 Route::get('users/{user}',  ['as' => 'users.edit', 'uses' => 'UserController@edit']);
 Route::patch('users/{user}/update',  ['as' => 'users.update', 'uses' => 'UserController@update']);
+Route::get('users/{user}/confirmdelete', ['as' => 'users.confirmdelete', 'uses' => 'UserController@confirmDelete']);
+Route::get('users/{user}/delete/', ['as' => 'users.delete', 'uses' => 'UserController@delete']);

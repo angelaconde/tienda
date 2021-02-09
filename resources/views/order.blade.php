@@ -33,7 +33,8 @@
 
                                     <div class="col-md-6">
                                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                            name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                            name="name" value="{{ old('name') ?? Auth::user()->name }}" required
+                                            autocomplete="name" autofocus>
 
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
@@ -50,7 +51,8 @@
                                     <div class="col-md-6">
                                         <input id="surname" type="text"
                                             class="form-control @error('surname') is-invalid @enderror" name="surname"
-                                            value="{{ old('surname') }}" required autocomplete="surname">
+                                            value="{{ old('surname') ?? Auth::user()->surname }}" required
+                                            autocomplete="surname">
 
                                         @error('surname')
                                             <span class="invalid-feedback" role="alert">
@@ -67,7 +69,8 @@
                                     <div class="col-md-6">
                                         <input id="telefono" type="tel"
                                             class="form-control @error('telefono') is-invalid @enderror" name="telefono"
-                                            value="{{ old('telefono') }}" required autocomplete="telefono">
+                                            value="{{ old('telefono') ?? Auth::user()->telefono }}" required
+                                            autocomplete="telefono">
 
                                         @error('telefono')
                                             <span class="invalid-feedback" role="alert">
@@ -84,7 +87,8 @@
                                     <div class="col-md-6">
                                         <input id="direccion" type="text"
                                             class="form-control @error('direccion') is-invalid @enderror" name="direccion"
-                                            value="{{ old('direccion') }}" required autocomplete="direccion">
+                                            value="{{ old('direccion') ?? Auth::user()->direccion }}" required
+                                            autocomplete="direccion">
 
                                         @error('direccion')
                                             <span class="invalid-feedback" role="alert">
@@ -99,7 +103,7 @@
 
                                     <div class="col-md-6">
                                         <input id="cp" type="text" class="form-control @error('cp') is-invalid @enderror"
-                                            name="cp" value="{{ old('cp') }}" required autocomplete="cp">
+                                            name="cp" value="{{ old('cp') ?? Auth::user()->cp }}" required autocomplete="cp">
 
                                         @error('cp')
                                             <span class="invalid-feedback" role="alert">
@@ -116,7 +120,8 @@
                                     <div class="col-md-6">
                                         <input id="poblacion" type="text"
                                             class="form-control @error('poblacion') is-invalid @enderror" name="poblacion"
-                                            value="{{ old('poblacion') }}" required autocomplete="poblacion">
+                                            value="{{ old('poblacion') ?? Auth::user()->poblacion }}" required
+                                            autocomplete="poblacion">
 
                                         @error('poblacion')
                                             <span class="invalid-feedback" role="alert">
@@ -133,7 +138,8 @@
                                     <div class="col-md-6">
                                         <input id="provincia" type="text"
                                             class="form-control @error('provincia') is-invalid @enderror" name="provincia"
-                                            value="{{ old('provincia') }}" required autocomplete="provincia">
+                                            value="{{ old('provincia') ?? Auth::user()->provincia }}" required
+                                            autocomplete="provincia">
 
                                         @error('provincia')
                                             <span class="invalid-feedback" role="alert">
