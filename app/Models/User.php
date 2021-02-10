@@ -28,7 +28,9 @@ class User extends Authenticatable
         'poblacion',
         'provincia',
         'password',
-        'deleted_at'
+        'deleted_at',
+        'provider',
+        'provider_id'
     ];
 
     /**
