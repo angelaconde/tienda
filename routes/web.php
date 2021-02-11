@@ -31,6 +31,11 @@ Route::get('order', 'OrderController@fillAddress')->name('order');
 Route::get('payment', 'OrderController@payment')->name('payment');
 Route::post('address', 'OrderController@validateAddress')->name('address');
 
+// Pagos
+Route::get('handle-payment', 'PayPalPaymentController@handlePayment')->name('make.payment');
+Route::get('cancel-payment', 'PayPalPaymentController@paymentCancel')->name('cancel.payment');
+Route::get('payment-success', 'PayPalPaymentController@paymentSuccess')->name('success.payment');
+
 // Auth
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
