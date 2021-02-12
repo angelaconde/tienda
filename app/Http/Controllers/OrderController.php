@@ -8,6 +8,8 @@ use Cart;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Mail\OrderReceived;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -164,6 +166,8 @@ class OrderController extends Controller
             $product = new ProductController;
             $product->update($item->id, $item->quantity);
         }
+        // SEND EMAIL
+        Mail::to(Auth::user()->email)->send(new OrderReceived());
         // EMPTY CART
         Cart::clear();
     }
