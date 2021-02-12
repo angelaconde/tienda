@@ -153,12 +153,18 @@ class OrderController extends Controller
         // PRODUCTS
         $cartItems = Cart::getContent();
         foreach ($cartItems as $item) {
-            $product = new OrderProduct;
-            $product->pedidos_id = $order->id;
-            $product->precio = $item->price;
-            $product->articulos_id = $item->id;
-            $product->cantidad = $item->quantity;
-            $product->save();
+            // ADD TO TABLE articulos_pedido
+            $orderProduct = new OrderProduct;
+            $orderProduct->pedidos_id = $order->id;
+            $orderProduct->precio = $item->price;
+            $orderProduct->articulos_id = $item->id;
+            $orderProduct->cantidad = $item->quantity;
+            $orderProduct->save();
+            // UPDATE QUANTITY IN TABLE articulos
+            $product = new ProductController;
+            $product->update($item->id, $item->quantity);
         }
+        // EMPTY CART
+        Cart::clear();
     }
 }
