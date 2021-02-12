@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use PDF;
 
 class OrderReceived extends Mailable
 {
@@ -28,6 +29,11 @@ class OrderReceived extends Mailable
      */
     public function build()
     {
-        return $this->subject('Gracias por su pedido')->view('emailorder');
+        $pdf = PDF::loadView('pdf');
+        return $this->subject('Gracias por su pedido')
+            ->view('emailorder')
+            ->attachData($pdf->output(), "pedido.pdf", [
+                'mime' => 'application/pdf',
+            ]);
     }
 }
