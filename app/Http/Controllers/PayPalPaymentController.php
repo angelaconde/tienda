@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\ExpressCheckout;
+use App\Http\Controllers\OrderController;
 use Cart;
 
 class PayPalPaymentController extends Controller
@@ -45,6 +46,8 @@ class PayPalPaymentController extends Controller
         $response = $paypalModule->getExpressCheckoutDetails($request->token);
 
         if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
+            $order = new OrderController;
+            $order->store();
             return view('pagocorrecto');
         }
 

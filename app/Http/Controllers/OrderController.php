@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 use Cart;
 use App\Models\Product;
+use App\Models\Order;
+use App\Models\OrderProduct;
 
 class OrderController extends Controller
 {
@@ -85,7 +88,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Display the address form.
+     * Displays the address form.
      *
      * @return \Illuminate\Http\Response
      */
@@ -98,7 +101,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Display the payment details.
+     * Displays the payment details.
      *
      * @return \Illuminate\Http\Response
      */
@@ -125,5 +128,37 @@ class OrderController extends Controller
             'provincia' => ['required', 'string', 'max:45']
         ]));
         return redirect()->to('payment');
+    }
+
+    /**
+     * Stores the order.
+     * 
+     */
+    public function store()
+    {
+        // ORDER
+        $order = new Order;
+        $order->email = Auth::user()->email;
+        $order->telefono = session('address.telefono');
+        $order->name = session('address.name');
+        $order->surname = session('address.surname');
+        $order->direccion = session('address.direccion');
+        $order->cp = session('address.cp');
+        $order->poblacion = session('address.poblacion');
+        $order->provincia = session('address.provincia');
+        $order->fecha = NOW();
+        $order->estado = 'P';
+        $order->users_id = Auth::user()->id;
+        $order->save();
+        // PRODUCTS
+        $cartItems = Cart::getContent();
+        foreach ($cartItems as $item) {
+            $product = new OrderProduct;
+            $product->pedidos_id = $order->id;
+            $product->precio = $item->price;
+            $product->articulos_id = $item->id;
+            $product->cantidad = $item->quantity;
+            $product->save();
+        }
     }
 }
