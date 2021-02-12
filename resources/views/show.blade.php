@@ -7,7 +7,7 @@
         <div class="container p-4">
             <div class="row">
                 <div class="col-12 col-md-6">
-                    @if ($product->stock == 0)
+                    @if ($product->stock <= 0)
                         <figure class="figure tag tag-out">
                         @elseif ($product->descuento > 0)
                             <figure class="figure tag tag-sale">
@@ -34,7 +34,7 @@
                     <h5 class="pt-1">{{ $product->descripcion }}</h5>
                     <hr>
                     <!-- AÑADIR AL CARRITO -->
-                    <p class="text-muted">Stock: {{ $product->stock == 0 ? 'AGOTADO' : $product->stock }}</p>
+                    <p class="text-muted">Stock: {{ $product->stock <= 0 ? 'AGOTADO' : $product->stock }}</p>
                     <form action="{{ route('cart.add') }}" method="post">
                         @csrf
                         <input type="hidden" name="id" value="{{ $product->id }}">
@@ -49,7 +49,7 @@
                             </div>
                             <div class="col">
                                 <button type="submit" name="btn" class="btn btn-dark btn-md"
-                                    {{ $product->stock == 0 ? 'disabled' : '' }}> <i
+                                    {{ $product->stock <= 0 ? 'disabled' : '' }}> <i
                                         class="fas fa-shopping-cart mb-2 pr-2"></i>Añadir al carrito
                                 </button>
                             </div>

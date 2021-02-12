@@ -9,7 +9,7 @@
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 p-2 card-container">
                         <div class="card text-center product p-4 pt-5 border-0 h-100 rounded-0">
                             <a href="{{ route('product.show', $product) }}">
-                                @if ($product->stock == 0)
+                                @if ($product->stock <= 0)
                                     <figure class="figure tag tag-out">
                                     @elseif ($product->descuento > 0)
                                         <figure class="figure tag tag-sale">
@@ -27,7 +27,7 @@
                                         <h4><s>{{ $product->precio_sin_descuento }}€</s></h4>
                                     @endif
                                     <h3>{{ $product->precio_total }}€</h3>
-                                    <p>Stock: {{ $product->stock == 0 ? 'AGOTADO' : $product->stock }}</p>
+                                    <p>Stock: {{ $product->stock <= 0 ? 'AGOTADO' : $product->stock }}</p>
                                 </div>
                             </a>
                             <!-- AÑADIR AL CARRITO -->
@@ -47,7 +47,7 @@
                                     </div>
                                     <div class="row justify-content-center align-items-end h-50">
                                         <button type="submit" name="btn" class="btn btn-dark btn-md"
-                                            {{ $product->stock == 0 ? 'disabled' : '' }}>
+                                            {{ $product->stock <= 0 ? 'disabled' : '' }}>
                                             <i class="fas fa-shopping-cart mb-2 pr-2"></i>Añadir al carrito
                                         </button>
                                     </div>
