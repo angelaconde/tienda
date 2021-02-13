@@ -3,6 +3,26 @@
     @extends('layouts.app')
 
     @section('content')
+        <!-- TOAST DE PRODUCTO AÑADIDO -->
+        @if (session('success'))
+            <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end" style="z-index: 1">
+                <div class="w-25">
+                    <div class="toast ml-auto" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
+                        <div class="toast-header">
+                            <strong class="mr-auto">Producto añadido al carrito</strong>
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="toast-body">
+                            {{ session('success') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">$('.toast').toast('show');</script>
+        @endif
+        <!-- FIN DE TOAST -->
         <!-- DETALLE DE PRODUCTO -->
         <div class="container p-4">
             <div class="row">
@@ -58,16 +78,6 @@
                     <!-- FIN DE CARRITO -->
                 </div>
             </div>
-            <!-- ALERTA DE PRODUCTO AÑADIDO -->
-            @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
-            <!-- FIN DE ALERTA -->
         </div>
         <!-- FIN DE DETALLE DE PRODUCTO -->
     @endsection
