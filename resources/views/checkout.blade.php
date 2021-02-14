@@ -78,12 +78,10 @@
                             </form>
                         </div>
                         <div class="col text-right">
-                            <p>Subtotal: {{ Cart::getTotal() }}€</p>
-                            <p>Envío: 5€</p>
-                            <p>Total: {{ Cart::getTotal() + 5 }}€</p>
+                            <h2 class="mt-1">Total: {{ Cart::getTotal() }}€</h2>
                             <form action="{{ route('order') }}" method="GET">
                                 @csrf
-                                <button type="submit" class="btn btn-dark btn-lg">Realizar compra</button>
+                                <button type="submit" class="btn btn-dark btn-lg mt-1">Realizar compra</button>
                             </form>
                         </div>
                     </div>
