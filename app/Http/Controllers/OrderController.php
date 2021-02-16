@@ -10,6 +10,8 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Mail\OrderReceived;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -170,5 +172,144 @@ class OrderController extends Controller
         Mail::to(Auth::user()->email)->send(new OrderReceived());
         // EMPTY CART
         Cart::clear();
+    }
+
+    /**
+     * Display a listing of the resource by user id.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexByUser($user_id)
+    {
+        // Check if logged user
+        if (Auth::user()) {
+            // Check if logged user is the owner
+            if (Auth::user()->id == $user_id) {
+                $orders = Order::where('users_id', $user_id)->get();
+                foreach ($orders as $order) {
+                    $importe = OrderProduct::where('pedidos_id', $order->id)->sum(DB::raw('precio * cantidad'));
+                    $order->importe = $importe;
+                }
+                return view('orders')->with('orders', $orders);
+            } else {
+                return view('errors.denegado');
+            }
+        } else {
+            return redirect()->to('/');
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        // Check if logged user
+        if (Auth::user()) {
+            $order = Order::findOrFail($id);
+            // Check if currently logged user is the owner
+            if (Auth::user()->id == $order->users_id) {
+                $importe = OrderProduct::where('pedidos_id', $id)->sum(DB::raw('precio * cantidad'));
+                $order->importe = $importe;
+                $items = OrderProduct::where('pedidos_id', $id)->get();
+                foreach ($items as $item) {
+                    $product = Product::where('id', $item->articulos_id)->firstOrFail();
+                    $item->product = $product;
+                }
+                return view('detalle')->with([
+                    'order' => $order,
+                    'items' => $items,
+                ]);
+            } else {
+                return view('errors.denegado');
+            }
+        } else {
+            return redirect()->to('/');
+        }
+    }
+
+    /**
+     * Cancel the order.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function cancel($id)
+    {
+        // Check if logged user
+        if (Auth::user()) {
+            $order = Order::findOrFail($id);
+            // Check if currently logged user is the owner
+            if (Auth::user()->id == $order->users_id) {
+                // Check if order has not shipped
+                if ($order->estado == 'P') {
+                    // Change status to cancelled
+                    $order->estado = 'C';
+                    $order->save();
+                    // Put stock back
+                    $items = OrderProduct::where('pedidos_id', $id)->get();
+                    foreach ($items as $item) {
+                        $product = Product::where('id', $item->articulos_id)->firstOrFail();
+                        $product->stock = $product->stock + $item->cantidad;
+                        $product->save();
+                    }
+                    return redirect()->route('pedidos', ['user' => Auth::user()->id]);
+                } else {
+                    return view('errors.shipped');
+                }
+            } else {
+                return view('errors.denegado');
+            }
+        } else {
+            return redirect()->to('/');
+        }
+    }
+
+    /**
+     * Confirmation to cancel the order.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function cancelConfirm($id)
+    {
+        // Check if logged user
+        if (Auth::user()) {
+            $order = Order::findOrFail($id);
+            // Check if currently logged user is the owner
+            if (Auth::user()->id == $order->users_id) {
+                // Check if order has not shipped
+                if ($order->estado == 'P') {
+                    return view('cancelconfirm')->with('id', $order->id);
+                } else {
+                    return view('errors.shipped');
+                }
+            } else {
+                return view('errors.denegado');
+            }
+        } else {
+            return redirect()->to('/');
+        }
+    }
+
+    /**
+     * Get PDF invoice
+     * 
+     */
+    public function downloadPDF($id)
+    {
+        $order = Order::findOrFail($id);
+        $importe = OrderProduct::where('pedidos_id', $id)->sum(DB::raw('precio * cantidad'));
+        $order->importe = $importe;
+        $items = OrderProduct::where('pedidos_id', $id)->get();
+        foreach ($items as $item) {
+            $product = Product::where('id', $item->articulos_id)->firstOrFail();
+            $item->product = $product;
+        }
+        $pdf = PDF::loadView('factura', ['order' => $order, 'items' => $items]);
+        return $pdf->download('factura.pdf');
     }
 }

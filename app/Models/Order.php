@@ -25,7 +25,6 @@ class Order extends Model
 
     protected $fillable = [
         'id',
-        'usuario_id',
         'email',
         'telefono',
         'name',

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +48,13 @@ Route::patch('users/{user}/update',  ['as' => 'users.update', 'uses' => 'UserCon
 Route::get('users/{user}/confirmdelete', ['as' => 'users.confirmdelete', 'uses' => 'UserController@confirmDelete']);
 Route::get('users/{user}/delete/', ['as' => 'users.delete', 'uses' => 'UserController@delete']);
 
-//OAuth
+// OAuth
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+
+// Pedidos
+Route::get('pedidos/{user}', ['as' => 'pedidos', 'uses' => 'OrderController@indexByUser']);
+Route::get('pedido/{id}', ['as' => 'pedido', 'uses' => 'OrderController@show']);
+Route::get('confirmar/{id}', 'OrderController@cancelConfirm')->name('confirmar');
+Route::get('cancelar/{id}', 'OrderController@cancel')->name('cancelar');
+Route::get('factura/{id}', 'OrderController@downloadPDF')->name('factura');
