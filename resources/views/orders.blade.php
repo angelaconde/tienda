@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 bg-light">
-                @if ($orders)
+                @if (count($orders))
                     <table class="table table-striped">
                         <thead class="text-center">
                             <th>IDENTIFICADOR</th>
