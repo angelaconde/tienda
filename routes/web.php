@@ -58,3 +58,6 @@ Route::get('pedido/{id}', ['as' => 'pedido', 'uses' => 'OrderController@show']);
 Route::get('confirmar/{id}', 'OrderController@cancelConfirm')->name('confirmar');
 Route::get('cancelar/{id}', 'OrderController@cancel')->name('cancelar');
 Route::get('factura/{id}', 'OrderController@downloadPDF')->name('factura');
+
+// Otros
+Route::view('legal', 'legal')->name('legal');
