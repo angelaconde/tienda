@@ -88,7 +88,7 @@ class ProductController extends Controller
     public function apiFeatured()
     {
         $products = Product::where('destacado', 1)->where('oculto', 0)->get();
-        // abort_if($products->isEmpty(), 404);
-        return $products->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        $productsJson = $products->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        return response($productsJson, 200);
     }
 }
