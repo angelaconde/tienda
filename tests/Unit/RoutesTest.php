@@ -13,11 +13,12 @@ class RoutesTest extends TestCase
      *
      * @return void
      */
-    public function testRoute()
+    public function testRouteMain()
     {
         $response = $this->get('/');
         $response->assertStatus(200);
     }
+
     /**
      * Test to check routes work.
      *
@@ -28,6 +29,18 @@ class RoutesTest extends TestCase
         $response = $this->get('/product');
         $response->assertStatus(200);
     }
+
+    /**
+     * Test to check routes work.
+     *
+     * @return void
+     */
+    public function testRouteAllProducts()
+    {
+        $response = $this->get('/todo');
+        $response->assertStatus(200);
+    }
+
     /**
      * Test to check routes work.
      *
@@ -38,6 +51,7 @@ class RoutesTest extends TestCase
         $response = $this->get('/categoria/1');
         $response->assertStatus(200);
     }
+
     /**
      * Test to check routes work.
      *
@@ -48,6 +62,7 @@ class RoutesTest extends TestCase
         $response = $this->get('/login');
         $response->assertStatus(200);
     }
+
     /**
      * Test to check routes work.
      *
@@ -58,6 +73,40 @@ class RoutesTest extends TestCase
         $response = $this->get('/register');
         $response->assertStatus(200);
     }
+
+    /**
+     * Test to check routes work.
+     *
+     * @return void
+     */
+    public function testRouteCartCheckout()
+    {
+        $response = $this->get('cart-checkout');
+        $response->assertStatus(200);
+    }
+
+    /**
+     * Test to check routes work.
+     *
+     * @return void
+     */
+    public function testRouteOrder()
+    {
+        $response = $this->get('order');
+        $response->assertStatus(200);
+    }
+
+    /**
+     * Test to check routes work.
+     *
+     * @return void
+     */
+    public function testRoutePayment()
+    {
+        $response = $this->get('payment');
+        $response->assertStatus(200);
+    }
+
     /**
      * Test to check empty category gives 404 error message.
      * 
