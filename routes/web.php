@@ -61,3 +61,6 @@ Route::get('factura/{id}', 'OrderController@downloadPDF')->name('factura');
 
 // Otros
 Route::view('legal', 'legal')->name('legal');
+
+// API
+Route::get('api/portada', 'ProductController@apiFeatured');

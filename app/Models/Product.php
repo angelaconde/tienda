@@ -40,6 +40,13 @@ class Product extends Model
     ];
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = ['id', 'codigo', 'categorias_id', 'imagen', 'anuncio', 'destacado', 'destacado_comienzo', 'destacado_final', 'oculto', 'created_at'];
+
+    /**
      * Calculate the VAT.
      *
      * @return int
