@@ -1,3 +1,8 @@
+<?php
+use App\Http\Controllers\GeoController; 
+?>
+
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -45,6 +50,8 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('img/logo.png') }}" alt="Supermercado La Marisma">
                 </a>
+                <span class="navbar-text pl-5">Nos visitas desde: {{ GeoController::getCity() }}
+                </span>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="{{ __('Toggle navigation') }}">
@@ -75,7 +82,7 @@
                                     <a class="dropdown-item" href="{{ route('pedidos', Auth::user()->id) }}">Mis
                                         pedidos</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
+                                                        document.getElementById('logout-form').submit();">
                                         {{ __('Cerrar sesión') }}
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
