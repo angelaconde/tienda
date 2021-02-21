@@ -79,16 +79,4 @@ class ProductController extends Controller
         $product->stock = $product->stock - $quantity;
         $product->save();
     }
-
-    /**
-     * Returns the resource if it's featured.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function apiFeatured()
-    {
-        $products = Product::where('destacado', 1)->where('oculto', 0)->get();
-        $productsJson = $products->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        return response($productsJson, 200);
-    }
 }
