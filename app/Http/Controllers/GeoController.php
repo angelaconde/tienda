@@ -8,7 +8,9 @@ class GeoController extends Controller
 {
     public static function getCity()
     {
-        $geojson = file_get_contents("http://api.ipstack.com/check?access_key=42fa7efcac0f85a67e38857d619984ca");
+        $ip = request()->ip();
+        $key = '42fa7efcac0f85a67e38857d619984ca';
+        $geojson = file_get_contents("http://api.ipstack.com/" . $ip . "?access_key=" . $key);
         $jsondata = json_decode($geojson);
         $city = $jsondata->city;
         return $city;
