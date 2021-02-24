@@ -40,10 +40,10 @@
 <!-- - Importación y exportación en XML
     - Exportar
     - Importar -->
-<!-- - Exportación de datos en formato de hoja de cálculo
-    - Exporta la lista de artículos en una hoja de Excel
-    - Exportar la lista de categorias en una hoja de Excel
-    - Exportar la lista de pedidos y la información del detalle de pedido en una hoja de Excel -->
+- Exportación de datos en formato de hoja de cálculo
+    <!-- - Exporta la lista de artículos en una hoja de Excel -->
+    <!-- - Exportar la lista de categorias en una hoja de Excel -->
+    - Exportar la lista de pedidos y la información del detalle de pedido en una hoja de Excel
 <!-- - Utilización de Ajax con JSON o XML -->
 <!-- - Utilización de paquetes que facilitan creación de paneles de administración en otra aplicación -->
 

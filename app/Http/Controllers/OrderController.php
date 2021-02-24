@@ -12,6 +12,10 @@ use App\Mail\OrderReceived;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\OrderExport;
+use App\Exports\OrdersExport;
+
 
 class OrderController extends Controller
 {
@@ -311,5 +315,23 @@ class OrderController extends Controller
         }
         $pdf = PDF::loadView('factura', ['order' => $order, 'items' => $items]);
         return $pdf->download('factura.pdf');
+    }
+
+    /**
+     * Get EXCEL export
+     * @return \Illuminate\Support\Collection
+     */
+    public function fileExportOrder($id)
+    {
+        return Excel::download(new OrderExport($id), 'pedido.xlsx');
+    }
+
+    /**
+     * Get EXCEL export
+     * @return \Illuminate\Support\Collection
+     */
+    public function fileExportOrderList($id)
+    {
+        return Excel::download(new OrdersExport($id), 'pedidos.xlsx');
     }
 }

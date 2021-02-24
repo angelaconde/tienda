@@ -57,7 +57,12 @@ Route::get('pedidos/{user}', ['as' => 'pedidos', 'uses' => 'OrderController@inde
 Route::get('pedido/{id}', ['as' => 'pedido', 'uses' => 'OrderController@show']);
 Route::get('confirmar/{id}', 'OrderController@cancelConfirm')->name('confirmar');
 Route::get('cancelar/{id}', 'OrderController@cancel')->name('cancelar');
+// PDF
 Route::get('factura/{id}', 'OrderController@downloadPDF')->name('factura');
+
+// EXCEL
+Route::get('excelpedido/{id}', [OrderController::class, 'fileExportOrder'])->name('excel-pedido');
+Route::get('excelpedidos/{id}', [OrderController::class, 'fileExportOrderList'])->name('excel-pedidos');
 
 // Otros
 Route::view('legal', 'legal')->name('legal');

@@ -37,15 +37,23 @@
                                         @endswitch
                                     </td>
                                     <td class="align-middle">
-                                        <a href="{{ route('pedido', $order->id) }}"><i class="fas fa-search"></i></a>
+                                        <a href="{{ route('pedido', $order->id) }}"><i class="fas fa-search"
+                                                title="Ver detalle"></i></a>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="{{ route('factura', $order->id) }}"><i class="fas fa-download"></i></a>
+                                        <a href="{{ route('factura', $order->id) }}"><i class="fas fa-file-pdf fa-lg"
+                                                title="Descargar PDF"></i></a>
+                                        <a href="{{ route('excel-pedido', $order->id) }}"><i
+                                                class="fas fa-file-excel fa-lg pl-1" title="Descargar EXCEL"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="container text-center">
+                        <a href="{{ route('excel-pedidos', Auth::user()->id) }}" class="btn btn-primary"><i class="fas fa-download"
+                                title="Descargar todos los pedidos en EXCEL"></i> Descargar lista de pedidos en EXCEL</a>
+                    </div>
                 @else
                     <div class="container text-center">
                         <div class="jumbotron m-2">
