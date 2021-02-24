@@ -20,7 +20,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Productos
 Route::get('portada', function() {
     $products = new ProductResource(Product::where('destacado', 1)->where('oculto', 0)->get());
     return $products->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 });
+
+// Categorias
+Route::get('categories', 'CategoryController@index');
+Route::get('category/{id}', 'CategoryController@show');
+Route::post('category', 'CategoryController@store');
+Route::put('category/{id}', 'CategoryController@update');
+Route::delete('category/{id}', 'CategoryController@destroy');
