@@ -188,7 +188,7 @@ class OrderController extends Controller
         // Check if logged user
         if (Auth::user()) {
             // Check if logged user is the owner
-            if (Auth::user()->id == $user_id) {
+            if ($this->isOwner($user_id)) {
                 $orders = Order::where('users_id', $user_id)->get();
                 foreach ($orders as $order) {
                     $importe = OrderProduct::where('pedidos_id', $order->id)->sum(DB::raw('precio * cantidad'));
@@ -215,7 +215,7 @@ class OrderController extends Controller
         if (Auth::user()) {
             $order = Order::findOrFail($id);
             // Check if currently logged user is the owner
-            if (Auth::user()->id == $order->users_id) {
+            if ($this->isOwner($order->users_id)) {
                 $importe = OrderProduct::where('pedidos_id', $id)->sum(DB::raw('precio * cantidad'));
                 $order->importe = $importe;
                 $items = OrderProduct::where('pedidos_id', $id)->get();
@@ -247,7 +247,7 @@ class OrderController extends Controller
         if (Auth::user()) {
             $order = Order::findOrFail($id);
             // Check if currently logged user is the owner
-            if (Auth::user()->id == $order->users_id) {
+            if ($this->isOwner($order->users_id)) {
                 // Check if order has not shipped
                 if ($order->estado == 'P') {
                     // Change status to cancelled
@@ -284,7 +284,7 @@ class OrderController extends Controller
         if (Auth::user()) {
             $order = Order::findOrFail($id);
             // Check if currently logged user is the owner
-            if (Auth::user()->id == $order->users_id) {
+            if ($this->isOwner($order->users_id)) {
                 // Check if order has not shipped
                 if ($order->estado == 'P') {
                     return view('cancelconfirm')->with('id', $order->id);
@@ -305,7 +305,27 @@ class OrderController extends Controller
      */
     public function downloadPDF($id)
     {
-        $order = Order::findOrFail($id);
+        // Check if logged user
+        if (Auth::user()) {
+            $order = Order::findOrFail($id);
+            // Check if currently logged user is the owner
+            if ($this->isOwner($order->users_id)) {
+                return $this->generatePDF($id, $order);
+            } else {
+                return view('errors.denegado');
+            }
+        } else {
+            return redirect()->to('/');
+        }
+    }
+
+    /**
+     * Generate PDF
+     * 
+     * @return PDF
+     */
+    public function generatePDF($id, $order)
+    {
         $importe = OrderProduct::where('pedidos_id', $id)->sum(DB::raw('precio * cantidad'));
         $order->importe = $importe;
         $items = OrderProduct::where('pedidos_id', $id)->get();
@@ -317,21 +337,55 @@ class OrderController extends Controller
         return $pdf->download('factura.pdf');
     }
 
+
     /**
      * Get EXCEL export
+     * 
      * @return \Illuminate\Support\Collection
      */
     public function fileExportOrder($id)
     {
-        return Excel::download(new OrderExport($id), 'pedido.xlsx');
+        // Check if logged user
+        if (Auth::user()) {
+            $order = Order::findOrFail($id);
+            // Check if currently logged user is the owner
+            if ($this->isOwner($order->users_id)) {
+                return Excel::download(new OrderExport($id), 'pedido.xlsx');
+            } else {
+                return view('errors.denegado');
+            }
+        } else {
+            return redirect()->to('/');
+        }
     }
 
     /**
      * Get EXCEL export
+     * 
      * @return \Illuminate\Support\Collection
      */
     public function fileExportOrderList($id)
     {
-        return Excel::download(new OrdersExport($id), 'pedidos.xlsx');
+        // Check if logged user
+        if (Auth::user()) {
+            // Check if currently logged user is the owner
+            if ($this->isOwner($id)) {
+                return Excel::download(new OrdersExport($id), 'pedidos.xlsx');
+            } else {
+                return view('errors.denegado');
+            }
+        } else {
+            return redirect()->to('/');
+        }
+    }
+
+    /**
+     * Checks if Auth user is owner
+     * 
+     * @return boolean
+     */
+    public function isOwner($id)
+    {
+        return (Auth::user()->id == $id) ? true : false;
     }
 }
