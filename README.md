@@ -37,8 +37,8 @@
 - Pago de productos con tarjeta
     - Pago con tarjeta mediante PayPal
 - Exportación de datos en formato de hoja de cálculo
-    <!-- - Exporta la lista de artículos en una hoja de Excel -->
-    <!-- - Exportar la lista de categorias en una hoja de Excel -->
+    - Exporta la lista de artículos en una hoja de Excel
+    - Exportar la lista de categorias en una hoja de Excel
     - Exportar la lista de pedidos y la información del detalle de pedido en una hoja de Excel
 
 ## SIN HACER:

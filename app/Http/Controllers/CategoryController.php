@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
-use App\Http\Requests;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CategoryExport;
 
 class CategoryController extends Controller
 {
@@ -93,5 +94,15 @@ class CategoryController extends Controller
             return  new CategoryResource($category);
         }
         return "No se ha podido eliminar.";
+    }
+
+    /**
+     * Get Excel of categories
+     * 
+     * @return \Illuminate\Support\Collection
+     */
+    public function fileExport()
+    {
+        return Excel::download(new CategoryExport, 'categorias.xlsx');
     }
 }

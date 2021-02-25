@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Http\Resources\ProductResource;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProductExport;
 
 class ProductController extends Controller
 {
@@ -78,5 +81,15 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->stock = $product->stock - $quantity;
         $product->save();
+    }
+
+    /**
+     * Get Excel of products
+     * 
+     * @return \Illuminate\Support\Collection
+     */
+    public function fileExport()
+    {
+        return Excel::download(new ProductExport, 'productos.xlsx');
     }
 }

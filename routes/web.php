@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,6 +65,8 @@ Route::get('factura/{id}', 'OrderController@downloadPDF')->name('factura');
 // EXCEL
 Route::get('excelpedido/{id}', [OrderController::class, 'fileExportOrder'])->name('excel-pedido');
 Route::get('excelpedidos/{id}', [OrderController::class, 'fileExportOrderList'])->name('excel-pedidos');
+Route::get('excelarticulos', [ProductController::class, 'fileExport'])->name('excel-articulos');
+Route::get('excelcategorias', [CategoryController::class, 'fileExport'])->name('excel-categorias');
 
 // Otros
 Route::view('legal', 'legal')->name('legal');
