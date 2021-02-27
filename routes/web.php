@@ -16,11 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Productos
+// Productos:
+// Destacados
 Route::get('/', 'ProductController@indexByFeatured');
+// De una Categoria
 Route::get('categoria/{categoria_id}', 'ProductController@indexByCategory')->name('categoria');
+// Todos
 Route::get('todo', 'ProductController@index')->name('todo');
-Route::resource('product', ProductController::class);
+// Detalle de un producto
+Route::get('product/{id}', 'ProductController@show')->name('product.show');
 
 // Carrito
 Route::post('/cart-add', 'CartController@add')->name('cart.add');

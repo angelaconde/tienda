@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Http\Resources\ProductResource;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProductExport;
 
