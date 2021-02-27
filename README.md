@@ -1,6 +1,6 @@
 # PRÁCTICA SERVIDOR 2ºDAW
 
-<!-- ![Preview](https://github.com/angelaconde/tienda/blob/master/doc/preview.png) -->
+![Preview](https://github.com/angelaconde/tienda/blob/master/preview.png)
 
 ## HECHO:
 
