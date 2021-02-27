@@ -44,11 +44,11 @@
 ## SIN HACER:
 - Soporte para múltiples monedas
 - Importación y exportación en XML
-    - Exportar
-    - Importar
 - Utilización de Ajax con JSON o XML
 - Utilización de paquetes que facilitan creación de paneles de administración en otra aplicación
 
-
-
-
+## PAQUETES DE TERCEROS UTILIZADOS:
+- Laravel Shopping Cart: https://github.com/darryldecode/laravelshoppingcart
+- Laravel PayPal: https://github.com/srmklive/laravel-paypal
+- Laravel DOMPDF: https://github.com/barryvdh/laravel-dompdf
+- Laravel EXCEL: https://github.com/Maatwebsite/Laravel-Excel

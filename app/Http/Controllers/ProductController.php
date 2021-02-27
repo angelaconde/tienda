@@ -17,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $pagination = 8;
+        $pagination = env('PAGINATION_PRODUCTS', 8);
         $products = Product::where('oculto', 0)->paginate($pagination);
         return view('products')
             ->with('products', $products)
@@ -31,7 +31,7 @@ class ProductController extends Controller
      */
     public function indexByFeatured()
     {
-        $pagination = 8;
+        $pagination = env('PAGINATION_PRODUCTS', 8);
         $products = Product::where('destacado', 1)->where('oculto', 0)->paginate($pagination);
         abort_if($products->isEmpty(), 404);
         return view('products')
@@ -46,7 +46,7 @@ class ProductController extends Controller
      */
     public function indexByCategory($categoria_id)
     {
-        $pagination = 8;
+        $pagination = env('PAGINATION_PRODUCTS', 8);
         $products = Product::where('categorias_id', $categoria_id)->where('oculto', 0)->paginate($pagination);
         abort_if($products->isEmpty(), 404);
         return view('products')
