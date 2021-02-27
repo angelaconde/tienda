@@ -52,3 +52,4 @@
 - Laravel PayPal: https://github.com/srmklive/laravel-paypal
 - Laravel DOMPDF: https://github.com/barryvdh/laravel-dompdf
 - Laravel EXCEL: https://github.com/Maatwebsite/Laravel-Excel
+- PhpDocumentor: https://github.com/phpDocumentor/phpDocumentor
