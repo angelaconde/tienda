@@ -26,7 +26,7 @@ class RoutesTest extends TestCase
      */
     public function testRouteProduct()
     {
-        $response = $this->get('/product');
+        $response = $this->get('/product/1');
         $response->assertStatus(200);
     }
 
